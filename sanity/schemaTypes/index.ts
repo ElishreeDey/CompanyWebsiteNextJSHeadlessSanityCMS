@@ -12,5 +12,5 @@ import { service } from './service'
 import { teamMember } from './teamMember'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [siteSettings, service],
+  types: [siteSettings, service, teamMember],
 }

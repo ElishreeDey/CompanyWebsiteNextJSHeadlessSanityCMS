@@ -45,6 +45,13 @@ export const siteSettings = defineType({
       options: { hotspot: true },
     }),
     defineField({
+      name: 'vision',
+      title: 'Vision',
+      type: 'text',
+      rows: 3, // Shown on the About page.
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'footerText',
       title: 'Footer Text',
       type: 'text',
