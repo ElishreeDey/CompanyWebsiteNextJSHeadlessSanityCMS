@@ -11,7 +11,8 @@ import { siteSettings } from './siteSettings'
 import { service } from './service'
 import { teamMember } from './teamMember'
 import { post } from './post'
+import { contactMessage } from './contactMessage'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [siteSettings, service, teamMember, post],
+  types: [siteSettings, service, teamMember, post, contactMessage],
 }
