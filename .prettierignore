@@ -1,0 +1,17 @@
+node_modules
+.next
+out
+build
+coverage
+test-results
+playwright-report
+blob-report
+playwright/.cache
+
+# generated — regenerate via `npm run typegen`, don't hand-format
+sanity.types.ts
+schema.json
+
+package-lock.json
+*.tsbuildinfo
+next-env.d.ts
