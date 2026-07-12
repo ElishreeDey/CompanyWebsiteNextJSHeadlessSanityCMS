@@ -20,10 +20,12 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const { data: post } = await sanityFetch({ query: POST_QUERY, params: { slug } });
+  const { data: post } = await sanityFetch({
+    query: POST_QUERY,
+    params: { slug },
+  });
 
   if (!post) {
     return { title: BLOG_MESSAGES.postNotFoundTitle };
@@ -38,17 +40,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: "article",
       publishedTime: post.publishedAt,
       authors: [post.author],
-      images: post.image ? [urlFor(post.image).width(1200).height(630).url()] : [],
+      images: post.image
+        ? [urlFor(post.image).width(1200).height(630).url()]
+        : [],
     },
   };
 }
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const { data: post } = await sanityFetch({ query: POST_QUERY, params: { slug } });
+  const { data: post } = await sanityFetch({
+    query: POST_QUERY,
+    params: { slug },
+  });
 
   if (!post) {
-    notFound(); 
+    notFound();
   }
 
   return (

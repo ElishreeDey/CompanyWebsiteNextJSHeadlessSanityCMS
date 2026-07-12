@@ -32,7 +32,7 @@ export default function BlogError({
         {BLOG_MESSAGES.errorMessage}
       </p>
       <button
-        onClick={() => unstable_retry()} // re-fetch and re-render 
+        onClick={() => unstable_retry()} // re-fetch and re-render
         className="rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc]"
       >
         {BLOG_MESSAGES.retryButtonLabel}

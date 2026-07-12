@@ -8,13 +8,12 @@
  */
 
 export const TEAM_MESSAGES = {
-
-  // app/team/page.tsx 
+  // app/team/page.tsx
   listTitle: "Our Team",
   listDescription: "Meet the team members.",
   emptyState: "No team members published yet.",
 
-  // app/team/error.tsx 
+  // app/team/error.tsx
   errorTitle: "Couldn't load the team",
   errorMessage: "Unable to fetch team members from Sanity.",
   retryButtonLabel: "Please try again",

@@ -1,7 +1,7 @@
 /*
  ****************************************************************************************************************************
  * Filename    : blog.spec
- * Description : End-to-end Test coverage for the blog flow actual tests on data. 
+ * Description : End-to-end Test coverage for the blog flow actual tests on data.
  * Author      : Elishree Dey Chand
  * Created     : 2026-07-10
  ****************************************************************************************************************************
@@ -26,9 +26,7 @@ test.describe("Blog listing", () => {
     expect(href).toMatch(/^\/blog\/.+/);
   });
 
-  test("clicking a post navigates to its own detail page", async ({
-    page,
-  }) => {
+  test("clicking a post navigates to its own detail page", async ({ page }) => {
     await page.goto("/blog");
 
     const firstItem = page.locator("main ul li").first();

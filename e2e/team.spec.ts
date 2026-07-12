@@ -1,7 +1,7 @@
 /*
  ****************************************************************************************************************************
  * Filename    : team.spec
- * Description : End-to-end coverage for the team flow. 
+ * Description : End-to-end coverage for the team flow.
  * Author      : Elishree Dey Chand
  * Created     : 2026-07-12
  ****************************************************************************************************************************
