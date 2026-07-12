@@ -1,7 +1,7 @@
 /*
  ****************************************************************************************************************************
  * Filename    : page
- * Description : Team listing page — fetches all team members from Sanity via sanityFetch 
+ * Description : Team listing page — fetches all team members from Sanity via sanityFetch
  * Author      : Elishree Dey Chand
  * Created     : 2026-07-10
  ****************************************************************************************************************************

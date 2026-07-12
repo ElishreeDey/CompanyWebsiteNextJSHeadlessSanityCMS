@@ -1,7 +1,7 @@
 /*
  ****************************************************************************************************************************
  * Filename    : page
- * Description : Team member detail page — fetches a single team member by _id from Sanity. 
+ * Description : Team member detail page — fetches a single team member by _id from Sanity.
  * Author      : Elishree Dey Chand
  * Created     : 2026-07-12
  ****************************************************************************************************************************
@@ -19,11 +19,12 @@ type Props = {
   params: Promise<{ id: string }>;
 };
 
-
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
-  const { data: member } = await sanityFetch({ query: TEAM_MEMBER_QUERY, params: { id } });
+  const { data: member } = await sanityFetch({
+    query: TEAM_MEMBER_QUERY,
+    params: { id },
+  });
 
   if (!member) {
     return { title: TEAM_MESSAGES.memberNotFoundTitle };
@@ -35,14 +36,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: member.name,
       description: member.designation,
-      images: member.photo ? [urlFor(member.photo).width(1200).height(630).url()] : [],
+      images: member.photo
+        ? [urlFor(member.photo).width(1200).height(630).url()]
+        : [],
     },
   };
 }
 
 export default async function TeamMemberPage({ params }: Props) {
   const { id } = await params;
-  const { data: member } = await sanityFetch({ query: TEAM_MEMBER_QUERY, params: { id } });
+  const { data: member } = await sanityFetch({
+    query: TEAM_MEMBER_QUERY,
+    params: { id },
+  });
 
   if (!member) {
     notFound(); // renders not-found

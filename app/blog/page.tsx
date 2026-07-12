@@ -40,7 +40,10 @@ export default async function BlogPage() {
       <ul className="flex flex-col gap-10">
         {posts.map((post) => (
           <li key={post._id} className="flex flex-col gap-3">
-            <Link href={`/blog/${post.slug.current}`} className="flex flex-col gap-3">
+            <Link
+              href={`/blog/${post.slug.current}`}
+              className="flex flex-col gap-3"
+            >
               {post.image ? (
                 <Image
                   src={urlFor(post.image).width(800).height(400).url()}
@@ -55,12 +58,9 @@ export default async function BlogPage() {
               </h2>
             </Link>
             <p className="text-sm text-zinc-500">
-              {post.author} ·{" "}
-              {new Date(post.publishedAt).toLocaleDateString()}
+              {post.author} · {new Date(post.publishedAt).toLocaleDateString()}
             </p>
-            <p className="text-zinc-600 dark:text-zinc-400">
-              {post.excerpt}
-            </p>
+            <p className="text-zinc-600 dark:text-zinc-400">{post.excerpt}</p>
           </li>
         ))}
       </ul>

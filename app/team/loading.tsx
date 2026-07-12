@@ -1,7 +1,7 @@
 /*
  ****************************************************************************************************************************
  * Filename    : loading
- * Description : Instant loading UI for the team segment. 
+ * Description : Instant loading UI for the team segment.
  * Author      : Elishree Dey Chand
  * Created     : 2026-07-10
  ****************************************************************************************************************************

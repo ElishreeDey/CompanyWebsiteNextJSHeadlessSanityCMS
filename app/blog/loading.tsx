@@ -1,7 +1,7 @@
 /*
  ****************************************************************************************************************************
  * Filename    : loading
- * Description : Instant loading UI for the blog segment. Wraps both /blog and /blog/[slug] 
+ * Description : Instant loading UI for the blog segment. Wraps both /blog and /blog/[slug]
  * Author      : Elishree Dey Chand
  * Created     : 2026-07-09
  ****************************************************************************************************************************
