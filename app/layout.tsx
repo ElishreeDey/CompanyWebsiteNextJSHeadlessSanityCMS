@@ -17,6 +17,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const SITE_ICONS: Metadata["icons"] = { icon: "/company-icon.svg" };
+
 export async function generateMetadata(): Promise<Metadata> {
   try {
     const { data: siteSettings } = await sanityFetch({
@@ -31,6 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
         template: `%s | ${companyName}`,
       },
       description: siteSettings?.vision ?? SITE_MESSAGES.defaultVision,
+      icons: SITE_ICONS,
     };
   } catch {
     return {
@@ -39,6 +42,7 @@ export async function generateMetadata(): Promise<Metadata> {
         template: `%s | ${SITE_MESSAGES.defaultCompanyName}`,
       },
       description: SITE_MESSAGES.defaultVision,
+      icons: SITE_ICONS,
     };
   }
 }
