@@ -10,3 +10,4 @@
 export * from "./post";
 export * from "./teamMember";
 export * from "./service";
+export * from "./siteSettings";

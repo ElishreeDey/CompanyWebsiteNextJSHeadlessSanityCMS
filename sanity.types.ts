@@ -323,6 +323,7 @@ export type POST_QUERY_RESULT = {
 
 // Source: sanity/lib/queries/service.ts
 // Variable: SERVICES_QUERY
+// Query: *[_type == "service"] | order(title asc) {    _id,    title,    description,    price,    image  }
 export type SERVICES_QUERY_RESULT = Array<{
   _id: string;
   title: string;
@@ -337,8 +338,27 @@ export type SERVICES_QUERY_RESULT = Array<{
   };
 }>;
 
+// Source: sanity/lib/queries/siteSettings.ts
+// Variable: SITE_SETTINGS_QUERY
+// Query: *[_type == "siteSettings"][0] {    companyName,    bannerTitle,    subtitle,    logo,    vision,    footerText  }
+export type SITE_SETTINGS_QUERY_RESULT = {
+  companyName: string;
+  bannerTitle: string;
+  subtitle: string | null;
+  logo: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  vision: string;
+  footerText: string | null;
+} | null;
+
 // Source: sanity/lib/queries/teamMember.ts
 // Variable: TEAM_MEMBERS_QUERY
+// Query: *[_type == "teamMember"] | order(name asc) {    _id,    name,    photo,    designation,    bio  }
 export type TEAM_MEMBERS_QUERY_RESULT = Array<{
   _id: string;
   name: string;
@@ -377,6 +397,7 @@ declare module "@sanity/client" {
     '\n  *[_type == "post"] | order(publishedAt desc) {\n    _id,\n    title,\n    slug,\n    author,\n    publishedAt,\n    excerpt,\n    image\n  }\n': POSTS_QUERY_RESULT;
     '\n  *[_type == "post" && slug.current == $slug][0] {\n    _id,\n    title,\n    slug,\n    author,\n    publishedAt,\n    excerpt,\n    image,\n    content\n  }\n': POST_QUERY_RESULT;
     '\n  *[_type == "service"] | order(title asc) {\n    _id,\n    title,\n    description,\n    price,\n    image\n  }\n': SERVICES_QUERY_RESULT;
+    '\n  *[_type == "siteSettings"][0] {\n    companyName,\n    bannerTitle,\n    subtitle,\n    logo,\n    vision,\n    footerText\n  }\n': SITE_SETTINGS_QUERY_RESULT;
     '\n  *[_type == "teamMember"] | order(name asc) {\n    _id,\n    name,\n    photo,\n    designation,\n    bio\n  }\n': TEAM_MEMBERS_QUERY_RESULT;
     '\n  *[_type == "teamMember" && _id == $id][0] {\n    _id,\n    name,\n    photo,\n    designation,\n    bio\n  }\n': TEAM_MEMBER_QUERY_RESULT;
   }
