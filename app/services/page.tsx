@@ -23,7 +23,7 @@ export default async function ServicesPage() {
   const { data: services } = await sanityFetch({ query: SERVICES_QUERY });
 
   return (
-    <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-8 px-16 py-32">
+    <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-8 px-16 py-20">
       <h1 className="text-3xl font-semibold tracking-tight">
         {SERVICES_MESSAGES.listTitle}
       </h1>

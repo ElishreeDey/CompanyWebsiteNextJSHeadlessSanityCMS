@@ -26,7 +26,7 @@ export default async function BlogPage() {
   const { data: posts } = await sanityFetch({ query: POSTS_QUERY });
 
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-16 py-32">
+    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-16 py-20">
       <h1 className="text-3xl font-semibold tracking-tight">
         {BLOG_MESSAGES.listTitle}
       </h1>

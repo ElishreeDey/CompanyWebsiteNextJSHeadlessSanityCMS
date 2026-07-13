@@ -24,7 +24,7 @@ export default async function TeamPage() {
   const { data: members } = await sanityFetch({ query: TEAM_MEMBERS_QUERY });
 
   return (
-    <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-8 px-16 py-32">
+    <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-8 px-16 py-20">
       <h1 className="text-3xl font-semibold tracking-tight">
         {TEAM_MESSAGES.listTitle}
       </h1>

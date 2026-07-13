@@ -9,7 +9,7 @@
 
 export default function ServicesLoading() {
   return (
-    <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-8 px-16 py-32">
+    <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-8 px-16 py-20">
       <div className="h-9 w-48 animate-pulse rounded bg-zinc-200 dark:bg-zinc-800" />
 
       <ul className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3">

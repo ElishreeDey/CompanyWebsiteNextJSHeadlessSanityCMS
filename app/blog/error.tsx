@@ -24,7 +24,7 @@ export default function BlogError({
   }, [error]);
 
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col items-start gap-4 px-16 py-32">
+    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col items-start gap-4 px-16 py-20">
       <h1 className="text-2xl font-semibold tracking-tight">
         {BLOG_MESSAGES.errorTitle}
       </h1>

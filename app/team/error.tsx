@@ -24,7 +24,7 @@ export default function TeamError({
   }, [error]);
 
   return (
-    <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col items-start gap-4 px-16 py-32">
+    <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col items-start gap-4 px-16 py-20">
       <h1 className="text-2xl font-semibold tracking-tight">
         {TEAM_MESSAGES.errorTitle}
       </h1>

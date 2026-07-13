@@ -55,7 +55,7 @@ export default async function TeamMemberPage({ params }: Props) {
   }
 
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-16 py-32">
+    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-16 py-20">
       {member.photo ? (
         <Image
           src={urlFor(member.photo).width(600).height(600).url()}

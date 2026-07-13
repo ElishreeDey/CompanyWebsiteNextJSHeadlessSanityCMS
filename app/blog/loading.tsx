@@ -9,7 +9,7 @@
 
 export default function BlogLoading() {
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-16 py-32">
+    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-16 py-20">
       <div className="h-9 w-32 animate-pulse rounded bg-zinc-200 dark:bg-zinc-800" />
 
       <ul className="flex flex-col gap-10">

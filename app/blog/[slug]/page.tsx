@@ -59,7 +59,7 @@ export default async function BlogPostPage({ params }: Props) {
   }
 
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-16 py-32">
+    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-16 py-20">
       {post.image ? (
         <Image
           src={urlFor(post.image).width(1200).height(600).url()}
