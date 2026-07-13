@@ -11,10 +11,18 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
 import { SITE_MESSAGES } from "@/app/messages";
 
+async function getSiteSettings() {
+  try {
+    const { data } = await sanityFetch({ query: SITE_SETTINGS_QUERY });
+    return data;
+  } catch (error) {
+    console.error("[Footer]", error);
+    return null;
+  }
+}
+
 export default async function Footer() {
-  const { data: siteSettings } = await sanityFetch({
-    query: SITE_SETTINGS_QUERY,
-  });
+  const siteSettings = await getSiteSettings();
   const companyName =
     siteSettings?.companyName ?? SITE_MESSAGES.defaultCompanyName;
 

@@ -32,10 +32,18 @@ const NAV_LINKS = [
   },
 ];
 
+async function getSiteSettings() {
+  try {
+    const { data } = await sanityFetch({ query: SITE_SETTINGS_QUERY });
+    return data;
+  } catch (error) {
+    console.error("[Nav]", error);
+    return null;
+  }
+}
+
 export default async function Nav() {
-  const { data: siteSettings } = await sanityFetch({
-    query: SITE_SETTINGS_QUERY,
-  });
+  const siteSettings = await getSiteSettings();
   const companyName =
     siteSettings?.companyName ?? SITE_MESSAGES.defaultCompanyName;
 
