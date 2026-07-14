@@ -17,6 +17,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+//company-website icon display in browser's tab.
 const SITE_ICONS: Metadata["icons"] = { icon: "/company-icon.svg" };
 
 export async function generateMetadata(): Promise<Metadata> {

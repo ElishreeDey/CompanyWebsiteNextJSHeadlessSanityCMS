@@ -30,6 +30,11 @@ const NAV_LINKS = [
     label: SITE_MESSAGES.navServices,
     tooltip: SITE_MESSAGES.navServicesTooltip,
   },
+  {
+    href: "/contact",
+    label: SITE_MESSAGES.navContact,
+    tooltip: SITE_MESSAGES.navContactTooltip,
+  },
 ];
 
 async function getSiteSettings() {

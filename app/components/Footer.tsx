@@ -29,10 +29,13 @@ export default async function Footer() {
   return (
     <footer className="border-t border-black/[.08] dark:border-white/[.145]">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-1 px-16 py-8 text-sm text-zinc-500">
-        {siteSettings?.footerText ? <p>{siteSettings.footerText}</p> : null}
-        <p>
-          © {new Date().getFullYear()} {companyName}
-        </p>
+        {siteSettings?.footerText ? (
+          <p>{siteSettings.footerText}</p>
+        ) : (
+          <p>
+            © {new Date().getFullYear()} {companyName}
+          </p>
+        )}
       </div>
     </footer>
   );
