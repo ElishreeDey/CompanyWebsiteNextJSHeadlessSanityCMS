@@ -1,0 +1,22 @@
+node_modules
+.next
+.git
+
+# env files — pass values as build args / compose env instead (see .env.example)
+.env*
+!.env.example
+
+# testing
+/coverage
+/test-results
+/playwright-report
+/blob-report
+playwright/.cache
+
+# not needed for `next build` — only for `npm run typegen`
+schema.json
+
+# misc
+.DS_Store
+npm-debug.log*
+*.md
