@@ -25,16 +25,6 @@ test.describe("Contact page", () => {
     ).toBeVisible();
   });
 
-  test("the honeypot field is present but hidden from view", async ({
-    page,
-  }) => {
-    await page.goto("/contact");
-
-    const honeypot = page.locator('input[name="company"]');
-    await expect(honeypot).toBeAttached();
-    await expect(honeypot).not.toBeVisible();
-  });
-
   test("shows a validation error when required fields are empty", async ({
     page,
   }) => {

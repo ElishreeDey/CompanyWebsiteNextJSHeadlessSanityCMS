@@ -1,7 +1,9 @@
 /*
  ****************************************************************************************************************************
  * Filename    : page
- * Description : Blog post detail page — fetches a single post by slug from Sanity and renders its full content.
+ * Description : Blog post detail page — Incremental Static Regeneration (ISR). Known slugs are prerendered at
+ *               build time via generateStaticParams; pages are then re-generated in the background at most
+ *               once every REVALIDATE_SECONDS.
  * Author      : Elishree Dey Chand
  * Created     : 2026-07-09
  ****************************************************************************************************************************
@@ -11,21 +13,35 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PortableText } from "next-sanity";
-import { sanityFetch } from "@/sanity/lib/live";
+import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
-import { POST_QUERY } from "@/sanity/lib/queries";
+import { POST_QUERY, POST_SLUGS_QUERY } from "@/sanity/lib/queries";
 import { BLOG_MESSAGES } from "@/app/blog/messages"; //centralized message for this segment
+
+const REVALIDATE_SECONDS = 60;
+
+export const revalidate = REVALIDATE_SECONDS;
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
+export async function generateStaticParams() {
+  const slugs = await client.fetch(POST_SLUGS_QUERY);
+  return slugs.map((slug) => ({ slug }));
+}
+
+async function getPost(slug: string) {
+  return client.fetch(
+    POST_QUERY,
+    { slug },
+    { next: { revalidate: REVALIDATE_SECONDS } }
+  );
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const { data: post } = await sanityFetch({
-    query: POST_QUERY,
-    params: { slug },
-  });
+  const post = await getPost(slug);
 
   if (!post) {
     return { title: BLOG_MESSAGES.postNotFoundTitle };
@@ -49,17 +65,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const { data: post } = await sanityFetch({
-    query: POST_QUERY,
-    params: { slug },
-  });
+  const post = await getPost(slug);
 
   if (!post) {
     notFound();
   }
 
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-16 py-20">
+    <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-8 px-16 py-20">
       {post.image ? (
         <Image
           src={urlFor(post.image).width(1200).height(600).url()}

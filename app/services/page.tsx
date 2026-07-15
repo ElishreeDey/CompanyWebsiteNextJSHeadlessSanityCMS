@@ -1,7 +1,7 @@
 /*
  ****************************************************************************************************************************
  * Filename    : page
- * Description : Services listing page — fetches all services from Sanity via sanityFetch and renders them
+ * Description : Services listing page — statically generated (SSG). Rebuild/redeploy to pick up Sanity content changes.
  * Author      : Elishree Dey Chand
  * Created     : 2026-07-13
  ****************************************************************************************************************************
@@ -9,7 +9,7 @@
 
 import type { Metadata } from "next";
 import Image from "next/image";
-import { sanityFetch } from "@/sanity/lib/live";
+import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { SERVICES_QUERY } from "@/sanity/lib/queries";
 import { SERVICES_MESSAGES } from "@/app/services/messages";
@@ -20,7 +20,11 @@ export const metadata: Metadata = {
 };
 
 export default async function ServicesPage() {
-  const { data: services } = await sanityFetch({ query: SERVICES_QUERY });
+  const services = await client.fetch(
+    SERVICES_QUERY,
+    {},
+    { next: { revalidate: false } }
+  );
 
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-8 px-16 py-20">

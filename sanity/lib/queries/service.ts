@@ -19,3 +19,14 @@ export const SERVICES_QUERY = defineQuery(`
     image
   }
 `);
+
+// First 3 services, alphabetical by title — for the homepage highlights section.
+export const FEATURED_SERVICES_QUERY = defineQuery(`
+  *[_type == "service"] | order(title asc) [0...3] {
+    _id,
+    title,
+    description,
+    price,
+    image
+  }
+`);

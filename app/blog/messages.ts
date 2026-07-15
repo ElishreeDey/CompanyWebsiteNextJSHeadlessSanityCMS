@@ -11,6 +11,8 @@ export const BLOG_MESSAGES = {
   listTitle: "Blog",
   listDescription: "News, updates, and articles from the team.",
   emptyState: "No posts published yet.",
+  searchPlaceholder: "Search posts by title...",
+  searchNoResults: "No posts match your search.",
 
   // app/blog/error.tsx — fetchfailure UI.
   errorTitle: "Couldn't load the blog",

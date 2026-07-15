@@ -16,6 +16,11 @@ import { SITE_MESSAGES } from "@/app/messages";
 
 const NAV_LINKS = [
   {
+    href: "/about",
+    label: SITE_MESSAGES.navAbout,
+    tooltip: SITE_MESSAGES.navAboutTooltip,
+  },
+  {
     href: "/blog",
     label: SITE_MESSAGES.navBlog,
     tooltip: SITE_MESSAGES.navBlogTooltip,
