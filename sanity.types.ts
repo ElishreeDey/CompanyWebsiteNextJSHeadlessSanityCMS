@@ -285,6 +285,30 @@ export type POSTS_QUERY_RESULT = Array<{
 }>;
 
 // Source: sanity/lib/queries/post.ts
+// Variable: FEATURED_POSTS_QUERY
+// Query: *[_type == "post"] | order(publishedAt desc) [0...3] {    _id,    title,    slug,    author,    publishedAt,    excerpt,    image  }
+export type FEATURED_POSTS_QUERY_RESULT = Array<{
+  _id: string;
+  title: string;
+  slug: Slug;
+  author: string;
+  publishedAt: string;
+  excerpt: string;
+  image: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+}>;
+
+// Source: sanity/lib/queries/post.ts
+// Variable: POST_SLUGS_QUERY
+// Query: *[_type == "post" && defined(slug.current)].slug.current
+export type POST_SLUGS_QUERY_RESULT = Array<string>;
+
+// Source: sanity/lib/queries/post.ts
 // Variable: POST_QUERY
 // Query: *[_type == "post" && slug.current == $slug][0] {    _id,    title,    slug,    author,    publishedAt,    excerpt,    image,    content  }
 export type POST_QUERY_RESULT = {
@@ -325,6 +349,23 @@ export type POST_QUERY_RESULT = {
 // Variable: SERVICES_QUERY
 // Query: *[_type == "service"] | order(title asc) {    _id,    title,    description,    price,    image  }
 export type SERVICES_QUERY_RESULT = Array<{
+  _id: string;
+  title: string;
+  description: string;
+  price: number;
+  image: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+}>;
+
+// Source: sanity/lib/queries/service.ts
+// Variable: FEATURED_SERVICES_QUERY
+// Query: *[_type == "service"] | order(title asc) [0...3] {    _id,    title,    description,    price,    image  }
+export type FEATURED_SERVICES_QUERY_RESULT = Array<{
   _id: string;
   title: string;
   description: string;
@@ -395,8 +436,11 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     '\n  *[_type == "post"] | order(publishedAt desc) {\n    _id,\n    title,\n    slug,\n    author,\n    publishedAt,\n    excerpt,\n    image\n  }\n': POSTS_QUERY_RESULT;
+    '\n  *[_type == "post"] | order(publishedAt desc) [0...3] {\n    _id,\n    title,\n    slug,\n    author,\n    publishedAt,\n    excerpt,\n    image\n  }\n': FEATURED_POSTS_QUERY_RESULT;
+    '\n  *[_type == "post" && defined(slug.current)].slug.current\n': POST_SLUGS_QUERY_RESULT;
     '\n  *[_type == "post" && slug.current == $slug][0] {\n    _id,\n    title,\n    slug,\n    author,\n    publishedAt,\n    excerpt,\n    image,\n    content\n  }\n': POST_QUERY_RESULT;
     '\n  *[_type == "service"] | order(title asc) {\n    _id,\n    title,\n    description,\n    price,\n    image\n  }\n': SERVICES_QUERY_RESULT;
+    '\n  *[_type == "service"] | order(title asc) [0...3] {\n    _id,\n    title,\n    description,\n    price,\n    image\n  }\n': FEATURED_SERVICES_QUERY_RESULT;
     '\n  *[_type == "siteSettings"][0] {\n    companyName,\n    bannerTitle,\n    subtitle,\n    logo,\n    vision,\n    footerText\n  }\n': SITE_SETTINGS_QUERY_RESULT;
     '\n  *[_type == "teamMember"] | order(name asc) {\n    _id,\n    name,\n    photo,\n    designation,\n    bio\n  }\n': TEAM_MEMBERS_QUERY_RESULT;
     '\n  *[_type == "teamMember" && _id == $id][0] {\n    _id,\n    name,\n    photo,\n    designation,\n    bio\n  }\n': TEAM_MEMBER_QUERY_RESULT;

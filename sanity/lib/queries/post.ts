@@ -22,6 +22,24 @@ export const POSTS_QUERY = defineQuery(`
   }
 `);
 
+// Latest 3 posts, newest first — for the homepage featured-posts section.
+export const FEATURED_POSTS_QUERY = defineQuery(`
+  *[_type == "post"] | order(publishedAt desc) [0...3] {
+    _id,
+    title,
+    slug,
+    author,
+    publishedAt,
+    excerpt,
+    image
+  }
+`);
+
+// All post slugs — for generateStaticParams on the blog detail page.
+export const POST_SLUGS_QUERY = defineQuery(`
+  *[_type == "post" && defined(slug.current)].slug.current
+`);
+
 // Single post by slug, including the full body — for the blog detail page.
 export const POST_QUERY = defineQuery(`
   *[_type == "post" && slug.current == $slug][0] {

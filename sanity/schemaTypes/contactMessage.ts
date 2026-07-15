@@ -9,6 +9,8 @@
 
 import { defineField, defineType } from "sanity";
 
+import { CONTACT_FIELD_LIMITS } from "@/app/contact/constants";
+
 // Defines a new document schema
 export const contactMessage = defineType({
   name: "contactMessage", // Schema name used in queries.
@@ -21,20 +23,21 @@ export const contactMessage = defineType({
       name: "name",
       title: "Name",
       type: "string",
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required().max(CONTACT_FIELD_LIMITS.name),
     }),
     defineField({
       name: "email",
       title: "Email",
       type: "string",
-      validation: (Rule) => Rule.required().email(), // valid email format sanity check.
+      validation: (Rule) =>
+        Rule.required().email().max(CONTACT_FIELD_LIMITS.email), // valid email format sanity check.
     }),
     defineField({
       name: "message",
       title: "Message",
       type: "text",
       rows: 4,
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required().max(CONTACT_FIELD_LIMITS.message),
     }),
   ],
 

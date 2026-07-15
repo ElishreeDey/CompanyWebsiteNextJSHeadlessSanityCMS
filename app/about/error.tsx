@@ -1,18 +1,18 @@
 /*
  ****************************************************************************************************************************
  * Filename    : error
- * Description : Error boundary for the blog segment. Catches failures from the Sanity fetch on /blog and /blog/[slug]
+ * Description : Errors for the about segment. Catches failures from the Sanity fetch for Site Settings (e.g. API being unreachable)
  * Author      : Elishree Dey Chand
- * Created     : 2026-07-09
+ * Created     : 2026-07-14
  ****************************************************************************************************************************
  */
 
 "use client"; // Error boundaries must be Client Components
 
 import { useEffect } from "react";
-import { BLOG_MESSAGES } from "@/app/blog/messages"; //centralized message for this segment
+import { ABOUT_MESSAGES } from "@/app/about/messages";
 
-export default function BlogError({
+export default function AboutError({
   error,
   unstable_retry,
 }: {
@@ -26,16 +26,16 @@ export default function BlogError({
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col items-start gap-4 px-16 py-20">
       <h1 className="text-2xl font-semibold tracking-tight">
-        {BLOG_MESSAGES.errorTitle}
+        {ABOUT_MESSAGES.errorTitle}
       </h1>
       <p className="text-zinc-600 dark:text-zinc-400">
-        {BLOG_MESSAGES.errorMessage}
+        {ABOUT_MESSAGES.errorMessage}
       </p>
       <button
-        onClick={() => unstable_retry()} // re-fetch and re-render
+        onClick={() => unstable_retry()}
         className="rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc]"
       >
-        {BLOG_MESSAGES.retryButtonLabel}
+        {ABOUT_MESSAGES.retryButtonLabel}
       </button>
     </main>
   );

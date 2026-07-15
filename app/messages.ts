@@ -14,6 +14,8 @@ export const SITE_MESSAGES = {
 
   // app/components/Nav.tsx
   navHome: "Home",
+  navAbout: "About",
+  navAboutTooltip: "Our vision and what drives us.",
   navBlog: "Blog",
   navBlogTooltip: "News, updates, and articles from the team.",
   navTeam: "Team",
@@ -23,6 +25,9 @@ export const SITE_MESSAGES = {
   navContact: "Contact Us",
   navContactTooltip: "Get in touch with us.",
 
-  // app/page.tsx — homepage sections.
-  visionHeading: "Our Vision",
+  // app/page.tsx — homepage highlight sections.
+  homeServicesHeading: "What We Offer",
+  homeServicesCta: "View all services",
+  homeBlogHeading: "From the Blog",
+  homeBlogCta: "Read all posts",
 } as const;

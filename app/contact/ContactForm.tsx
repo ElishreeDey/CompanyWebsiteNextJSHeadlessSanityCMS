@@ -1,7 +1,7 @@
 /*
  ****************************************************************************************************************************
  * Filename    : ContactForm
- * Description : ContactUs form - submits the submitContactUsMessage Server Action.
+ * Description : ContactUs form - submits via the submitContactMessage Server Action.
  * Author      : Elishree Dey Chand
  * Created     : 2026-07-13
  ****************************************************************************************************************************
@@ -15,6 +15,7 @@ import {
   type ContactFormState,
 } from "@/app/contact/actions";
 import { CONTACT_MESSAGES } from "@/app/contact/messages";
+import { CONTACT_FIELD_LIMITS } from "@/app/contact/constants";
 
 const initialState: ContactFormState = { status: "idle", message: "" };
 
@@ -38,6 +39,7 @@ export default function ContactForm() {
           name="name"
           type="text"
           required
+          maxLength={CONTACT_FIELD_LIMITS.name}
           className={inputClassName}
         />
       </div>
@@ -51,6 +53,7 @@ export default function ContactForm() {
           name="email"
           type="email"
           required
+          maxLength={CONTACT_FIELD_LIMITS.email}
           className={inputClassName}
         />
       </div>
@@ -64,6 +67,7 @@ export default function ContactForm() {
           name="message"
           rows={5}
           required
+          maxLength={CONTACT_FIELD_LIMITS.message}
           className={inputClassName}
         />
       </div>

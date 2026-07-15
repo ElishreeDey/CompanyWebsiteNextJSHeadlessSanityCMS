@@ -1,7 +1,7 @@
 /*
  ****************************************************************************************************************************
  * Filename    : writeClient
- * Description : Write contact us client messages.
+ * Description : Create ContactUS client messages to Sanity Server with SANITY_API_WRITE_TOKEN
  * Author      : Elishree Dey Chand
  * Created     : 2026-07-14
  ****************************************************************************************************************************

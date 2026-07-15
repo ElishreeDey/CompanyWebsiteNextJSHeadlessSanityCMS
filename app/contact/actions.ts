@@ -11,6 +11,7 @@
 
 import { writeClient } from "@/sanity/lib/writeClient";
 import { CONTACT_MESSAGES } from "@/app/contact/messages";
+import { CONTACT_FIELD_LIMITS } from "@/app/contact/constants";
 
 export type ContactFormState = {
   status: "idle" | "success" | "error";
@@ -29,6 +30,13 @@ export async function submitContactMessage(
 
   if (!name || !email || !message) {
     return { status: "error", message: CONTACT_MESSAGES.validationError };
+  }
+  if (
+    name.length > CONTACT_FIELD_LIMITS.name ||
+    email.length > CONTACT_FIELD_LIMITS.email ||
+    message.length > CONTACT_FIELD_LIMITS.message
+  ) {
+    return { status: "error", message: CONTACT_MESSAGES.tooLongError };
   }
   if (!EMAIL_PATTERN.test(email)) {
     return { status: "error", message: CONTACT_MESSAGES.invalidEmailError };

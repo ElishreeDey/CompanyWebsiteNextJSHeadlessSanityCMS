@@ -1,7 +1,7 @@
 /*
  ****************************************************************************************************************************
  * Filename    : page
- * Description : ContactUs page — form posts to a Server Action that creates a contactUsMessage in Sanity.
+ * Description : ContactUs page — form posts to a Server Action that creates a contactUsMessage document in Sanity.
  * Author      : Elishree Dey Chand
  * Created     : 2026-07-14
  ****************************************************************************************************************************
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-16 py-20">
+    <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-8 px-16 py-20">
       <h1 className="text-3xl font-semibold tracking-tight">
         {CONTACT_MESSAGES.pageTitle}
       </h1>

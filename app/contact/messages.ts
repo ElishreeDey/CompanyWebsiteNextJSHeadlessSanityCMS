@@ -18,7 +18,13 @@ export const CONTACT_MESSAGES = {
   successMessage: "Thanks! Your message has been sent.",
   validationError: "Please fill in all fields.",
   invalidEmailError: "Please enter a valid email address.",
+  tooLongError: "Please shorten your input too long.",
   notConfiguredError:
     "The contact form isn't fully configured yet. Please try again later.",
   submitError: "Something went wrong sending your message. Please try again.",
+
+  // app/contact/error.tsx — fetch-failure UI.
+  errorTitle: "Something went wrong",
+  errorMessage: "We couldn't load the contact page.",
+  retryButtonLabel: "Please try again",
 } as const;

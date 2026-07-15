@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Company Website — Next.js + Sanity
+
+A multi-page company website built with **Next.js (App Router)** for the frontend and **Sanity** as a headless CMS for all content — site settings, services, team members, blog posts, and contact form submissions.
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router), React 19, TypeScript
+- **CMS:** Sanity (embedded Studio at `/studio`)
+- **Styling:** Tailwind CSS 4
+- **Data fetching:** Sanity's Live Content API for real-time preview, plain cached `client.fetch` for statically generated pages, and [SWR](https://swr.vercel.app/) for client-side revalidation on the blog list
+- **Testing:** Playwright (end-to-end)
+- **Tooling:** ESLint, Prettier, Husky + lint-staged (pre-commit), Sanity TypeGen (generated query types)
+- **Deployment:** Docker
+
+## Features
+
+| Home | `/` | SSG | Banner, highlighted services, latest blog posts |
+| About | `/about` | SSG | Company vision + team members |
+| Services | `/services` | SSG | All services with price, description, image |
+| Blog | `/blog` | SSG + client-side SWR | Search-by-title, periodic client refresh |
+| Blog detail | `/blog/[slug]` | ISR (60s) | Pre-rendered known slugs via `generateStaticParams` |
+| Team | `/team` | Live fetch | Team grid |
+| Team detail | `/team/[id]` | Live fetch | Individual profile |
+| Contact | `/contact` | Dynamic | Form submits via a Server Action, stored in Sanity as a `contactMessage` document (with a length-capped, validated payload) |
+| Sanity Studio | `/studio` | — | Embedded content editor |
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Node.js 20+
+- A Sanity project (project ID + dataset)
+
+### Environment variables
+
+Copy `.env.example` to `.env.local` and fill in Sanity project details:
+
+```
+NEXT_PUBLIC_SANITY_PROJECT_ID=
+NEXT_PUBLIC_SANITY_DATASET=
+NEXT_PUBLIC_SANITY_API_VERSION=
+SANITY_API_WRITE_TOKEN=
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`SANITY_API_WRITE_TOKEN` needs **write** access (Editor or higher) — it's used server-side only, to create `contactMessage` documents from the contact form. It must never be exposed to the browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You'll also need to add your local dev origin (e.g. `http://localhost:3000`) to your Sanity project's CORS origins at `https://sanity.io/manage/project/<your-project-id>/api`, so the Studio and Live Content API work locally.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Install & run
 
-## Learn More
+```bash
+npm install
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Open [http://localhost:3000](http://localhost:3000) for the site, or [http://localhost:3000/studio](http://localhost:3000/studio) for the content editor.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Available Scripts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| `npm run dev` | Start the dev server |
+| `npm run build` | Production build (also builds the embedded Studio) |
+| `npm run start` | Serve the production build |
+| `npm run lint` | Run ESLint |
+| `npm run format` / `format:check` | Prettier write / check |
+| `npm run e2e` / `e2e:ui` | Run Playwright end-to-end tests (headless / UI mode) |
+| `npm run typegen` | Extract the Sanity schema and regenerate `sanity.types.ts` from the GROQ queries in `sanity/lib/queries` |
 
-## Deploy on Vercel
+## Content Model
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Defined in `sanity/schemaTypes/`:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Site Settings** — company name, banner title/subtitle, logo, vision, footer text (singleton)
+- **Service** — title, description, price, image
+- **Team Member** — name, photo, designation, bio
+- **Post** — title, slug, author, published date, excerpt, image, body (Portable Text)
+- **Contact Message** — name, email, message (created by the public contact form)
+
+## Testing
+
+End-to-end tests (`e2e/`) run with Playwright against a live dev server and the real Sanity dataset — they're read-only by design (the contact form tests exercise validation paths only, never a real submission, so CI runs don't leave spam documents in the dataset).
+
+```bash
+npm run e2e
+```
+
+## Docker
+
+```bash
+docker compose up --build
+```
+
+## Deployment
+
+The app builds with `output: "standalone"`, so it deploys cleanly to any Node/Docker host.
